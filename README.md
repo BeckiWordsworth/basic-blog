@@ -1,6 +1,6 @@
 ## Overview
 
-Just a basic blog website so I can mess around with Next.js a bit more. 
+Just a basic blog website so I can mess around with Next.js 14 a bit more.
 
 ## Getting Started
 
@@ -15,4 +15,3 @@ pnpm dev
 # or
 bun dev
 ```
-

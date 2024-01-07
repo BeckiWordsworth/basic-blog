@@ -28,6 +28,6 @@ export async function PUT(req, ctx) {
 
     return new Response(JSON.stringify({ msg: "Successfully liked a blog" }), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify(null), { status: 200 });
+    return new Response(JSON.stringify(null), { status: 500 });
   }
 }
