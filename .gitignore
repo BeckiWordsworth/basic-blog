@@ -16,3 +16,6 @@
 # misc
 .DS_Store
 *.pem
+
+# local env files
+.env*.local
