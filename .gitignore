@@ -15,7 +15,8 @@
 
 # misc
 .DS_Store
-*.pem
-
-# local env files
-.env*.local
+.env.local
+.env
+.env.development.local
+.env.test.local
+.env.production.local
