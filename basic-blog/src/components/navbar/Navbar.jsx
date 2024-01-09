@@ -36,7 +36,7 @@ const Navbar = () => {
                     Logout
                   </button>
                   <Link
-                    href="/create-post"
+                    href="/create-blog"
                     onClick={() => {
                       signIn();
                     }}
