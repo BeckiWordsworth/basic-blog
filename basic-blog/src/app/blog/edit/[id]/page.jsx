@@ -3,21 +3,21 @@
 import React from "react";
 import classes from "./edit.module.css";
 import { useSession } from "next-auth/session";
+import { useRouter } from "next/router";
+import { AiOutlineFileImage } from "react-icons/ai";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Edit = () => {
+  const CLOUD_NAME = "dzt4lxguf";
+  const UPLOAD_PRESET = "basic_blog_next";
+
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("Nature");
   const [photo, setPhoto] = ueState("");
   const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return <p>Loading ....</p>;
-  }
-
-  if (status === "unauthenticated") {
-    return <p className={classes.accessDenied}>Access Denied</p>;
-  }
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchBlog() {
@@ -31,11 +31,98 @@ const Edit = () => {
     fetchBlog();
   }, []);
 
+  if (status === "loading") {
+    return <p>Loading ....</p>;
+  }
+
+  if (status === "unauthenticated") {
+    return <p className={classes.accessDenied}>Access Denied</p>;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (title === "" || category === "" || desc === "") {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      let imageUrl = null;
+      if (photo) {
+        imageUrl = await uploadImage();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    const body = {
+      title,
+      desc,
+      category,
+    };
+    if (imageUrl != null) {
+      body.imageUrl = imageUrl;
+    }
+
+    const res = await fetch(`https://localhost:3000/api/blog/${ctx.params.id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+      },
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      throw new Error("Error has occured");
+    }
+
+    const blog = await res.json();
+    router.push(`/blog/${blog?._id}`);
+  };
+
+  const uploadImage = async () => {
+    if (!photo) return;
+
+    const formData = new FormData();
+
+    formData.append("file", photo);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try {
+      const res = await fetch(`https://api.cloudinary.com/v1_1${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      const imageUrl = data["secure_url"];
+      return imageUrl;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={classes.container}>
-      <div className={classes.wrapper}></div>
-      <h2>Edit Post fixing testing</h2>
-      <form></form>
+      <div className={classes.wrapper}>
+        <h2>Edit Post fixing testing</h2>
+        <form onSubmit={handleSubmit}>
+          <input value={title} type="text" placeholder="Title...." onChange={(e) => setTitle(e.target.value)} />
+          <textarea value={desc} placeholder="Description...." />
+          <select value={category} onCHnage={(e) => setCategory(e.target.value)}>
+            <option value="Nature">Nature</option>
+            <option value="Mountain">Mountain</option>
+            <option value="Ocean">Ocean</option>
+            <option value="Wildfire">Wildfire</option>
+            <option value="Forest">Forest</option>
+          </select>
+          <label htmlFor="image">
+            Upload Image <AiOutlineFileImage />
+          </label>
+          <input id="image" type="file" style={{ display: "none" }} onChange={(e) => setPhoto(e.target.files[0])} />
+          <button className={classes.CreateBlog}>Edit</button>
+        </form>
+      </div>
+      <ToastContainer />
     </div>
   );
 };
