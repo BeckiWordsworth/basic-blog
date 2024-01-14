@@ -2,27 +2,30 @@ import React from "react";
 import classes from "./comment.module.css";
 import { useSession } from "next-auth/react";
 import { format } from "timeago.js";
+import person from "../../../public/person.jpg";
+import { BsTrash } from "react-icons/bs";
+import Image from "next/image";
 
 const Comment = (comment, setComments) => {
   const { data: session } = useSession();
   const token = session?.user?.accessToken;
 
-  const handleDeleteComment = async() => {
+  const handleDeleteComment = async () => {
     try {
       await fetch(`http:..localhost:3000/api/comment/${comment?._id}`, {
         headers: {
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        method: "DELETE"
-      })
+        method: "DELETE",
+      });
 
-      setComments(prev => {
-        return {...prev}.filter((c) => c?._id !== comment?._id)
-      })
-    }catch (error) {
-      console.log(error)
+      setComments((prev) => {
+        return { ...prev }.filter((c) => c?._id !== comment?._id);
+      });
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className={classes.container}>
@@ -37,7 +40,7 @@ const Comment = (comment, setComments) => {
         </div>
         <div className={classes.right}>
           {session?.user?._id === comment?.authorId?._id && (
-            <BsTrash className={classes.trashIcon} onClick={handleDeleteComment}
+            <BsTrash className={classes.trashIcon} onClick={handleDeleteComment} />
           )}
         </div>
       </div>
