@@ -4,13 +4,13 @@ import Image from "next/image";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import classes from "./blogCard.module.css";
 
-const BlogCard = ({ blog: { title, desc, img } }) => {
+const BlogCard = ({ blog: { id, title, desc, img } }) => {
   const isLiked = true;
 
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <Link className={classes.imgContainer} href="/">
+        <Link className={classes.imgContainer} href={`/blog/${id}`}>
           <Image src={img} width="350" height="350" />
         </Link>
         <div className={classes.blogData}>
