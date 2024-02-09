@@ -14,6 +14,7 @@ import Comment from "@/components/comment/Comment";
 import person from "../../../../public/person.jpg";
 
 const BlogDetails = (ctx) => {
+  const [loading, setLoading] = useState(true);
   const [blogDetails, setBlogDetails] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const [blogLikes, setBlogLikes] = useState(0);
@@ -36,15 +37,18 @@ const BlogDetails = (ctx) => {
 
   useEffect(() => {
     async function fetchBlog() {
-      const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`, { cache: "no-store" });
+      setLoading(true);
+      const res = await fetch(`/api/blog/${ctx.params.id}`, { cache: "no-store" });
       const blog = await res.json();
 
       setBlogDetails(blog);
       setIsLiked(blog?.likes?.includes(session?.user?._id));
       setBlogLikes(blog?.likes?.length || 0);
+      setLoading(false);
     }
-    session && fetchBlog();
-  }, [session]);
+
+    fetchBlog();
+  }, []);
 
   const handleDelete = async () => {
     try {
@@ -114,6 +118,7 @@ const BlogDetails = (ctx) => {
       });
 
       const newComment = await res.json();
+      console.log(newComment);
 
       setComments((prev) => {
         return [newComment, ...prev];
@@ -124,6 +129,22 @@ const BlogDetails = (ctx) => {
       console.log(error);
     }
   };
+
+  if (loading) {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
+
+  if (!blogDetails) {
+    return (
+      <div>
+        <h2>No Blog Page</h2>
+      </div>
+    );
+  }
 
   return (
     <div className={classes.container}>

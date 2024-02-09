@@ -6,7 +6,7 @@ import person from "../../../public/person.jpg";
 import { BsTrash } from "react-icons/bs";
 import Image from "next/image";
 
-const Comment = (comment, setComments) => {
+const Comment = ({ comment, setComments }) => {
   const { data: session } = useSession();
   const token = session?.user?.accessToken;
 
@@ -27,6 +27,8 @@ const Comment = (comment, setComments) => {
     }
   };
 
+  console.log(comment);
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -34,7 +36,7 @@ const Comment = (comment, setComments) => {
           <Image src={person} width="45" height="45" alt="" />
           <div className={classes.userData}>
             <h4>{comment?.authorId?.username}</h4>
-            <span className={classes.timeago}>{format(comment?.createAt)}</span>
+            <span className={classes.timeago}>{format(comment?.createdAt)}</span>
           </div>
           <span>{comment?.text}</span>
         </div>

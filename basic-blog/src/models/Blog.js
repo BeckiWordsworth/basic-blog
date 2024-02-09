@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "./User";
 
 const BlogSchema = new mongoose.Schema(
   {
@@ -23,7 +24,7 @@ const BlogSchema = new mongoose.Schema(
     },
     authorId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User:",
+      ref: "User",
     },
     likes: {
       type: mongoose.Schema.Types.ObjectId,

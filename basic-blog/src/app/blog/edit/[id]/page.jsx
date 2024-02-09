@@ -1,21 +1,21 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./edit.module.css";
-import { useSession } from "next-auth/session";
-import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { AiOutlineFileImage } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Edit = () => {
+const Edit = (ctx) => {
   const CLOUD_NAME = "dzt4lxguf";
   const UPLOAD_PRESET = "basic_blog_next";
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("Nature");
-  const [photo, setPhoto] = ueState("");
+  const [photo, setPhoto] = useState("");
   const { data: session, status } = useSession();
   const router = useRouter();
 

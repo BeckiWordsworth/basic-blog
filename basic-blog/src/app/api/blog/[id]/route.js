@@ -4,7 +4,6 @@ import Blog from "@/models/Blog";
 
 export async function GET(req, ctx) {
   await db.connect();
-
   const id = ctx.params.id;
 
   try {
