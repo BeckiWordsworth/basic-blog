@@ -12,8 +12,9 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   const handleShowDropdown = () => setShowDropdown((prev) => true);
+
   const handleHideDropdown = () => setShowDropdown((prev) => false);
-  const loggedIn = false;
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -30,18 +31,13 @@ const Navbar = () => {
                   <button
                     onClick={() => {
                       signOut();
+                      handleHideDropdown();
                     }}
                     className={classes.logout}
                   >
                     Logout
                   </button>
-                  <Link
-                    href="/create-blog"
-                    onClick={() => {
-                      signIn();
-                    }}
-                    className={classes.create}
-                  >
+                  <Link onClick={handleHideDropdown} href="/create-blog" className={classes.create}>
                     Create
                   </Link>
                 </div>
@@ -49,9 +45,14 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link href="/login" className={classes.login}>
-                Login
-              </Link>
+              <button
+                onClick={() => {
+                  signIn();
+                }}
+                className={classes.login}
+              >
+                Log in
+              </button>
               <Link href="/register">Register</Link>
             </>
           )}
