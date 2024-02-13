@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import classes from "./createBlog.module.css";
+import StandardPage from "@/components/standardPage/StandardPage";
 
 const CreateBlog = () => {
   const CLOUD_NAME = "dzt4lxguf";
@@ -85,13 +86,15 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.wrapper}>
-        <h2>Create Post</h2>
+    <StandardPage>
+      <h2>Create Post</h2>
+      <div className={classes.page}>
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="Title..." onChange={(e) => setTitle(e.target.value)} />
-          <textarea placeholder="Description..." onChange={(e) => setDesc(e.target.value)} />
-          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <label for="description">Post Content</label>
+          <textarea id="description" rows="12" placeholder="Description..." onChange={(e) => setDesc(e.target.value)} />
+          <label for="category">Category</label>
+          <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="Nature">Nature</option>
             <option value="Mountain">Mountain</option>
             <option value="Ocean">Ocean</option>
@@ -105,8 +108,7 @@ const CreateBlog = () => {
           <button className={classes.createBlog}>Create</button>
         </form>
       </div>
-      <ToastContainer />
-    </div>
+    </StandardPage>
   );
 };
 

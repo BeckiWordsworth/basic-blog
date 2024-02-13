@@ -1,0 +1,16 @@
+.container{
+  margin-top: 5rem;
+  height: calc(100vh - 60px);
+  width: 100%;
+}
+
+.wrapper{
+  width: 85%;
+  margin: 0 auto;
+}
+
+.wrapper > h2 {
+  font-size: 32px;
+  color: #222;
+  letter-spacing: 1px; 
+}
