@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classes from "./login.module.css";
 import { signIn } from "next-auth/react";
+import StandardPage from "@/components/standardPage/StandardPage";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,8 +41,8 @@ const Login = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.wrapper}>
+    <StandardPage>
+      <div className={classes.page}>
         <h2>Log In</h2>
         <form onSubmit={handleSubmit}>
           <input type="email" placeholder="Email..." onChange={(e) => setEmail(e.target.value)} />
@@ -52,8 +53,7 @@ const Login = () => {
           </Link>
         </form>
       </div>
-      <ToastContainer />
-    </div>
+    </StandardPage>
   );
 };
 
