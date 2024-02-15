@@ -1,30 +1,14 @@
-.container{
-  min-height: calc(100vh -60px);
-  width: 100%;
-}
-
-.wrapper{
-  width: 85%;
-  height: 100%;
-  margin: 0 auto;
-  margin-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.wrapper > h2{
+.page > h2{
   font-size: 32px;
   color: #222;
   letter-spacing: 1px;
 }
 
-.wrapper > form{
+.page > form{
   margin-top: 2rem;
-  width: 20%;
   padding: 1.5rem;
   border: 1px solid #666;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,8 +16,9 @@
   gap: 2rem;
 }
 
-.wrapper > form > input,
-.wrapper > form > textarea{
+.page > form > input,
+.page > form > textarea{
+  width: 100%;
   outline: none;
   border: none;
   border-bottom: 1px solid #666;
@@ -41,10 +26,10 @@
   resize: none;
 }
 
-.wrapper > form > select{
+.page > form > select{
   outline: none;
   border-bottom: 1px solid #666;
-  padding: 0.4 rem;
+  padding: 0.4rem;
   resize: none;
   font-size: 18px;
   width: 180px;
@@ -52,9 +37,7 @@
   border-radius: 8px;
 }
 
-.wrapper > form > label{
-  width: 175px;
-  display: flex;
+.page > form > label{
   align-items: center;
   gap: 1.25rem;
   font-size: 18px;

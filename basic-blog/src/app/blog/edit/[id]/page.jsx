@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { AiOutlineFileImage } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import StandardPage from "@/components/standardPage/StandardPage";
 
 const Edit = (ctx) => {
   const CLOUD_NAME = "dzt4lxguf";
@@ -102,8 +103,8 @@ const Edit = (ctx) => {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.wrapper}>
+    <StandardPage>
+      <div className={classes.page}>
         <h2>Edit Post fixing testing</h2>
         <form onSubmit={handleSubmit}>
           <input value={title} type="text" placeholder="Title...." onChange={(e) => setTitle(e.target.value)} />
@@ -122,8 +123,7 @@ const Edit = (ctx) => {
           <button className={classes.CreateBlog}>Edit</button>
         </form>
       </div>
-      <ToastContainer />
-    </div>
+    </StandardPage>
   );
 };
 
