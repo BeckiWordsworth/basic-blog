@@ -107,8 +107,10 @@ const Edit = (ctx) => {
       <div className={classes.page}>
         <h2>Edit Post fixing testing</h2>
         <form onSubmit={handleSubmit}>
-          <input value={title} type="text" placeholder="Title...." onChange={(e) => setTitle(e.target.value)} />
-          <textarea value={desc} placeholder="Description...." />
+          <input type="text" placeholder="Title..." onChange={(e) => setTitle(e.target.value)} />
+          <label for="description">Post Content</label>
+          <textarea id="description" rows="12" placeholder="Description..." onChange={(e) => setDesc(e.target.value)} />
+          <label for="category">Category</label>
           <select value={category} onCHnage={(e) => setCategory(e.target.value)}>
             <option value="Nature">Nature</option>
             <option value="Mountain">Mountain</option>
@@ -120,7 +122,7 @@ const Edit = (ctx) => {
             Upload Image <AiOutlineFileImage />
           </label>
           <input id="image" type="file" style={{ display: "none" }} onChange={(e) => setPhoto(e.target.files[0])} />
-          <button className={classes.CreateBlog}>Edit</button>
+          <button className={classes.CreateBlog}>Update</button>
         </form>
       </div>
     </StandardPage>
