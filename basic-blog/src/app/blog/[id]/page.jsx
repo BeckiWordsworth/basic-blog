@@ -12,6 +12,7 @@ import { format } from "timeago.js";
 import { useRouter } from "next/navigation";
 import Comment from "@/components/comment/Comment";
 import person from "../../../../public/person.jpg";
+import Button from "@mui/material/Button";
 
 const BlogDetails = (ctx) => {
   const [loading, setLoading] = useState(true);
@@ -154,13 +155,13 @@ const BlogDetails = (ctx) => {
           <h3 className={classes.title}>{blogDetails?.title}</h3>
           {blogDetails?.authorId?._id.toString() === session?.user?._id.toString() ? (
             <div className={classes.controls}>
-              <Link className={classes.editButton} href={`/blog/edit/${ctx.params.id}`}>
+              <Button className={classes.editButton} href={`/blog/edit/${ctx.params.id}`}>
                 Edit <BsFillPencilFill />
-              </Link>
-              <button onClick={handleDelete} className={classes.deleteButton}>
+              </Button>
+              <Button onClick={handleDelete} className={classes.deleteButton}>
                 Delete
                 <AiFillDelete />
-              </button>
+              </Button>
             </div>
           ) : (
             <div className={classes.author}>
@@ -193,7 +194,7 @@ const BlogDetails = (ctx) => {
               placeholder="Type message..."
               onChange={(e) => setCommentText(e.target.value)}
             />
-            <button onClick={handleComment}>Post</button>
+            <Button onClick={handleComment}>Post</Button>
           </div>
           <div className={classes.comments}>
             {comments?.length > 0 ? (
