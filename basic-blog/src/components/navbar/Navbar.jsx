@@ -7,11 +7,6 @@ import person from "../../../public/person.jpg";
 import { AiOutlineClose } from "react-icons/ai";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { Dropdown } from "@mui/base/Dropdown";
-import { MenuButton } from "@mui/base/MenuButton";
-import ListItem from "@mui/material/ListItem";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
