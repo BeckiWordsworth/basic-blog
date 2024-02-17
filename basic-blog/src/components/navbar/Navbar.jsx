@@ -9,6 +9,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { Dropdown } from "@mui/base/Dropdown";
+import { MenuButton } from "@mui/base/MenuButton";
+import ListItem from "@mui/material/ListItem";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -59,14 +62,15 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <button
+              <Button
+                id="basic-button"
                 onClick={() => {
                   signIn();
                 }}
                 className={classes.login}
               >
                 Log in
-              </button>
+              </Button>
               <Link href="/register">Register</Link>
             </>
           )}
