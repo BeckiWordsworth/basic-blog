@@ -92,3 +92,8 @@
   top: 0.3rem;
   right: 0.3rem;
 }
+
+.menu{
+  display: flex;
+
+}
