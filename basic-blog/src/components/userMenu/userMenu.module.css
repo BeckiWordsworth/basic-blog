@@ -1,0 +1,7 @@
+.menu{
+  display: flex;
+}
+
+.menu > img{
+  margin-right: 0.5rem;
+}

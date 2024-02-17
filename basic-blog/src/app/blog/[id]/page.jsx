@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 import classes from "./blog.module.css";
 import { BsFillPencilFill } from "react-icons/bs";
 import { AiFillDelete, AiFillLike, AiOutlineLike } from "react-icons/ai";
-import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "timeago.js";
