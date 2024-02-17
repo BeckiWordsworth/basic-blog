@@ -5,7 +5,6 @@ import Image from "next/image";
 import classes from "./navbar.module.css";
 import person from "../../../public/person.jpg";
 
-import Button from "@mui/material/Button";
 import UserMenu from "../userMenu/UserMenu";
 
 const Navbar = () => {
