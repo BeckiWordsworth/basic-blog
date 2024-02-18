@@ -18,7 +18,7 @@ const handler = NextAuth({
 
         await db.connect();
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).select("+password");
 
         if (!user) {
           throw new Error("Invalid input");
@@ -49,6 +49,7 @@ const handler = NextAuth({
       if (user) {
         token.accessToken = user.accessToken;
         token._id = user._id;
+        token.username = user.username;
       }
 
       return token;
@@ -57,7 +58,10 @@ const handler = NextAuth({
       if (token) {
         session.user._id = token._id;
         session.user.accessToken = token.accessToken;
+        session.user.username = token.username;
       }
+
+      console.log(session);
 
       return session;
     },

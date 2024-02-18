@@ -7,32 +7,38 @@ import { Menu as BaseMenu } from "@mui/base/Menu";
 import { MenuButton as BaseMenuButton } from "@mui/base/MenuButton";
 import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem";
 import { styled } from "@mui/system";
+import Image from "next/image";
+import person from "../../../public/person.jpg";
+import classes from "./userMenu.module.css";
 
 const UserMenu = () => {
   const { data: session } = useSession();
 
   return (
-    <Dropdown>
-      <MenuButton>{session?.user ? session.user.email : "Login"}</MenuButton>
-      <Menu>
-        {session?.user ? (
-          <>
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>
-              <a href="/create-blog">Create Blog Post</a>
-            </MenuItem>
-            <MenuItem onClick={() => signOut()}>Logout</MenuItem>
-          </>
-        ) : (
-          <>
-            <MenuItem onClick={() => signIn()}>Login</MenuItem>
-            <MenuItem>
-              <a href="/register">Register</a>
-            </MenuItem>
-          </>
-        )}
-      </Menu>
-    </Dropdown>
+    <div className={classes.menu}>
+      {session?.user ? <Image src={person} width="45" height="45" /> : <div></div>}
+      <Dropdown>
+        <MenuButton>{session?.user ? session.user.username : "Login"}</MenuButton>
+        <Menu>
+          {session?.user ? (
+            <>
+              <MenuItem>Profile</MenuItem>
+              <MenuItem>
+                <a href="/create-blog">Create Blog Post</a>
+              </MenuItem>
+              <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem onClick={() => signIn()}>Login</MenuItem>
+              <MenuItem>
+                <a href="/register">Register</a>
+              </MenuItem>
+            </>
+          )}
+        </Menu>
+      </Dropdown>
+    </div>
   );
 };
 

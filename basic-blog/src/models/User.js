@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
   },
   { timestamps: true } //When it was update and when it was created

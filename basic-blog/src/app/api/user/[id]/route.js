@@ -1,25 +1,32 @@
 import db from "@/lib/db";
 import { verifyJwtToken } from "@/lib/jwt";
-import Comment from "@/models/Comment";
+import User from "@/models/User";
 
 export async function GET(req, ctx) {
   await db.connect();
 
   const id = ctx.params.id;
 
-  try {
-    const comments = await Comment.find({ blogId: id }).populate("authorId");
+  const accessToken = req.headers.get("authorization");
+  const token = accessToken.split(" ")[1];
 
-    return new Response(JSON.stringify(comments), { status: 200 });
+  const decodedToken = verifyJwtToken(token);
+
+  if (!accessToken || !decodedToken) {
+    return new Response(JSON.stringify({ error: "unauthorized (wrong or expired token)" }), { status: 403 });
+  }
+
+  try {
+    const user = await User.find({ _id: id });
+
+    return new Response(JSON.stringify(user), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify(null), { status: 500 });
+    return new Response(JSON.stringify({ error }), { status: 500 });
   }
 }
 
 export async function DELETE(req, ctx) {
   await db.connect();
-
-  const id = ctx.params.id;
 
   const accessToken = req.headers.get("authorization");
   const token = accessToken.split(" ")[1];
